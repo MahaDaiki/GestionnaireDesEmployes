@@ -5,4 +5,13 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+  <servlet>
+    <servlet-name>EmployeeServlet</servlet-name>
+    <servlet-class>controller.EmployeeServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>EmployeeServlet</servlet-name>
+    <url-pattern>/employees</url-pattern>
+  </servlet-mapping>
 </web-app>
