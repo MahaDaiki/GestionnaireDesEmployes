@@ -21,8 +21,8 @@
 		
 		<property name="show_sql">true</property> <!-- Show SQL in console -->
 		<property name="format_sql">true</property> <!-- Show SQL formatted -->
-		
-		<mapping class="model.Employee"/>
+
+		<mapping resource="model/Employee.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>

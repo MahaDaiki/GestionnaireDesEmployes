@@ -14,19 +14,19 @@ public class Employee {
     private String name;
     private String email;
     private String phone_number;
-    private String departement;
+    private String department;
     private String position;
 
     public Employee() {
 
     }
 
-    public Employee(int id, String name, String email, String phone_number, String departement, String position) {
+    public Employee(int id, String name, String email, String phone_number, String department, String position) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone_number = phone_number;
-        this.departement = departement;
+        this.department = department;
         this.position = position;
     }
 
@@ -65,12 +65,12 @@ public class Employee {
         this.phone_number = phone_number;
     }
 
-    public String getDepartement() {
-        return departement;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepartement(String departement) {
-        this.departement = departement;
+    public void setDepartment(String departement) {
+        this.department = departement;
     }
 
     public String getPosition() {
