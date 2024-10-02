@@ -52,4 +52,25 @@ public class EmployeeDaoImpl {
         }
         return employee;
     }
+
+    public void DeleteEmployee(long id) {
+     Transaction transaction = null;
+     try(Session session = sessionFactory.openSession()) {
+         transaction = session.beginTransaction();
+         Employee employee = session.get(Employee.class, id);
+          if (employee != null) {
+              session.delete(employee);
+              transaction.commit();
+              System.out.println("Employee deleted successfully");
+          }
+          else {
+              System.out.println("Employee not found");
+          }
+     }catch(Exception e) {
+         if(transaction != null) {
+             transaction.rollback();
+         }
+         e.printStackTrace();
+     }
+    }
 }

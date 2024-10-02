@@ -25,17 +25,22 @@ public class test {
 
         Employee employee = employeeService.getEmployee(employeeId);
 
-        if (employee != null) {
+//        if (employee != null) {
+//
+//            employee.setPosition("Senior Manager");
+//
+//
+//            employeeService.updateEmployee(employee);
+//
+//            System.out.println("Employee position updated successfully.");
+//        } else {
+//            System.out.println("Employee not found.");
+//        }
 
-            employee.setPosition("Senior Manager");
 
+        employeeService.deleteEmployee(employeeId);
 
-            employeeService.updateEmployee(employee);
-
-            System.out.println("Employee position updated successfully.");
-        } else {
-            System.out.println("Employee not found.");
-        }
+        System.out.println("Employee with ID " + employeeId + " has been deleted.");
     }
     }
 

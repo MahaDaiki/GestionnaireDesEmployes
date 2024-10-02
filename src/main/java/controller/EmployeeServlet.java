@@ -36,6 +36,9 @@ public class EmployeeServlet extends HttpServlet {
             case "update":
                 UpdateEmployee(request, response);
                 break;
+            case "delete":
+                DeleteEmployee(request, response);
+                break;
         }
     }
 
@@ -104,6 +107,15 @@ public class EmployeeServlet extends HttpServlet {
             }
         }else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid employee details");
+        }
+    }
+
+    private void DeleteEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idParm = request.getParameter("id");
+        if (idParm != null) {
+            long id = Integer.parseInt(idParm);
+            employeeService.deleteEmployee(id);
+            response.sendRedirect("index.jsp");
         }
     }
 
