@@ -3,6 +3,8 @@ package service;
 import dao.EmployeeDaoImpl;
 import model.Employee;
 
+import java.util.List;
+
 public class EmployeeService {
     EmployeeDaoImpl EmployeeDao;
 
@@ -25,5 +27,9 @@ public class EmployeeService {
 
     public void deleteEmployee(long id){
         EmployeeDao.DeleteEmployee(id);
+    }
+
+    public List<Employee> getAllEmployees(){
+        return EmployeeDao.GetAllEmployees();
     }
 }

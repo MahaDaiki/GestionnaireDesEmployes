@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class EmployeeDaoImpl {
 
     private SessionFactory sessionFactory;
@@ -72,5 +74,16 @@ public class EmployeeDaoImpl {
          }
          e.printStackTrace();
      }
+    }
+
+    public List<Employee> GetAllEmployees() {
+     List<Employee> employees = null;
+     try(Session session = sessionFactory.openSession()) {
+         employees = session.createQuery("from Employee").list();
+     }
+     catch(Exception e) {
+         e.printStackTrace();
+     }
+     return employees;
     }
 }
