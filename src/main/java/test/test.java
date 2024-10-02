@@ -38,9 +38,10 @@ public class test {
 //        }
 
 
-        employeeService.deleteEmployee(employeeId);
+//        employeeService.deleteEmployee(employeeId);
+//
+//        System.out.println("Employee with ID " + employeeId + " has been deleted.");
 
-        System.out.println("Employee with ID " + employeeId + " has been deleted.");
     }
     }
 

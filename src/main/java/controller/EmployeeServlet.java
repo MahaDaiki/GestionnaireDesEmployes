@@ -22,6 +22,11 @@ public class EmployeeServlet extends HttpServlet {
                 case "add":
                     showAddEmployee(request, response);
                     break;
+                case "edit":
+                    ShowEditEmployee(request, response);
+                default:
+                    showalleployees(request, response);
+
 
             }
     }
@@ -39,6 +44,8 @@ public class EmployeeServlet extends HttpServlet {
             case "delete":
                 DeleteEmployee(request, response);
                 break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Action not found");
         }
     }
 
@@ -117,6 +124,11 @@ public class EmployeeServlet extends HttpServlet {
             employeeService.deleteEmployee(id);
             response.sendRedirect("index.jsp");
         }
+    }
+
+    private void showalleployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
