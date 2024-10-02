@@ -12,6 +12,6 @@
 
   <servlet-mapping>
     <servlet-name>EmployeeServlet</servlet-name>
-    <url-pattern>/employees</url-pattern>
+    <url-pattern>/Employee</url-pattern>
   </servlet-mapping>
 </web-app>

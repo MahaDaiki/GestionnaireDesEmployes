@@ -9,6 +9,8 @@ public class EmployeeService {
     public EmployeeService() {
         this.EmployeeDao = new EmployeeDaoImpl();
     }
+
+
     public void addEmployee(Employee employee){
         EmployeeDao.AddEmployee(employee);
     }
