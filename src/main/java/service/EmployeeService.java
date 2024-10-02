@@ -14,4 +14,11 @@ public class EmployeeService {
     public void addEmployee(Employee employee){
         EmployeeDao.AddEmployee(employee);
     }
+    public void updateEmployee(Employee employee){
+        EmployeeDao.UpdateEmployee(employee);
+    }
+
+    public Employee getEmployee(long id){
+        return EmployeeDao.GetEmployeeById(id);
+    }
 }
