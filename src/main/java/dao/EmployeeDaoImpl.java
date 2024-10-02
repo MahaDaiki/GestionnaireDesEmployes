@@ -27,4 +27,29 @@ public class EmployeeDaoImpl {
          e.printStackTrace();
      }
  }
+    public void UpdateEmployee(Employee employee) {
+        Transaction transaction = null;
+        try(Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.update(employee);
+            transaction.commit();
+        }
+        catch(Exception e) {
+            if(transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public Employee GetEmployeeById(long id) {
+        Employee employee = null;
+        try(Session session = sessionFactory.openSession()) {
+            employee = session.get(Employee.class, id);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return employee;
+    }
 }

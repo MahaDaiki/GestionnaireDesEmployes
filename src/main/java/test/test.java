@@ -8,18 +8,34 @@ public class test {
 
         EmployeeService employeeService = new EmployeeService();
 
+//
+//        Employee newEmployee = new Employee();
+//        newEmployee.setName("test");
+//        newEmployee.setEmail("test@email.com");
+//        newEmployee.setPhone_number("0837475737");
+//        newEmployee.setDepartment("IT");
+//        newEmployee.setPosition("Software Engineer");
+//
+//
+//        employeeService.addEmployee(newEmployee);
+//
+//
+//        System.out.println("Employee added successfully!");
+        long employeeId = 1;
 
-        Employee newEmployee = new Employee();
-        newEmployee.setName("test");
-        newEmployee.setEmail("test@email.com");
-        newEmployee.setPhone_number("0837475737");
-        newEmployee.setDepartment("IT");
-        newEmployee.setPosition("Software Engineer");
+        Employee employee = employeeService.getEmployee(employeeId);
+
+        if (employee != null) {
+
+            employee.setPosition("Senior Manager");
 
 
-        employeeService.addEmployee(newEmployee);
+            employeeService.updateEmployee(employee);
 
-
-        System.out.println("Employee added successfully!");
+            System.out.println("Employee position updated successfully.");
+        } else {
+            System.out.println("Employee not found.");
+        }
     }
-}
+    }
+
