@@ -18,22 +18,23 @@ public class EmployeeServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String action = request.getParameter("action");
-            switch(action){
-                case "add":
-                    showAddEmployee(request, response);
-                    break;
-                case "edit":
-                    ShowEditEmployee(request, response);
-                    break;
-                case "search":
-                    searchEmployees(request, response);
-                    break;
-                default:
-                    showallEmployees(request, response);
+        String action = request.getParameter("action");
+
+        switch(action){
+            case "add":
+                showAddEmployee(request, response);
+                break;
+            case "edit":
+                ShowEditEmployee(request, response);
+                break;
+            case "search":
+                searchEmployees(request, response);
+                break;
+            default:
+                showallEmployees(request, response);
 
 
-            }
+        }
     }
 
     @Override
@@ -49,8 +50,8 @@ public class EmployeeServlet extends HttpServlet {
             case "delete":
                 DeleteEmployee(request, response);
                 break;
-            case "search":
-                searchEmployees(request, response);
+//            case "search":
+//                searchEmployees(request, response);
 
             default:
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Action not found");
@@ -58,7 +59,7 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void showAddEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("addEmployee.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/addEmployee.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -100,7 +101,7 @@ public class EmployeeServlet extends HttpServlet {
             employee.setPosition(position);
 
             employeeService.updateEmployee(employee);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("views/index.jsp");
 
         }
         else {
@@ -130,25 +131,30 @@ public class EmployeeServlet extends HttpServlet {
         if (idParm != null) {
             long id = Integer.parseInt(idParm);
             employeeService.deleteEmployee(id);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("views/index.jsp");
         }
     }
 
     private void showallEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Employee> employees = employeeService.getAllEmployees();
+        System.out.println(employees.size());
         request.setAttribute("employees", employees);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/index.jsp");
         dispatcher.forward(request, response);
     }
 
     private void searchEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        String search = request.getParameter("search");
-       if (search != null) {
-           List<Employee> employees = employeeService.SerchEmployee(search);
-           request.setAttribute("employees", employees);
-           RequestDispatcher dispatcher = request.getRequestDispatcher("employeeList.jsp");
-           dispatcher.forward(request, response);
-       }
+        List<Employee> employees;
+
+        if (search == null || search.isEmpty()) {
+            employees = employeeService.getAllEmployees();
+        } else {
+            employees = employeeService.SerchEmployee(search);
+        }
+       request.setAttribute("employees", employees);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/index.jsp");
+        dispatcher.forward(request, response);
     }
 
 }

@@ -30,7 +30,7 @@ nav{
 }
 
 .button {
-    margin: 2rem;
+    margin: 1rem;
     display: inline-block;
     padding: 10px 15px;
     background-color: #5aade3;
@@ -48,7 +48,7 @@ nav{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap:20px;
-    padding: 30px;
+    padding: 20px;
 }
 
 .card{
