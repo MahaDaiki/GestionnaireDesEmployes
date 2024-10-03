@@ -21,9 +21,9 @@ public class test {
 //
 //
 //        System.out.println("Employee added successfully!");
-        long employeeId = 1;
-
-        Employee employee = employeeService.getEmployee(employeeId);
+//        long employeeId = 1;
+//
+//        Employee employee = employeeService.getEmployee(employeeId);
 
 //        if (employee != null) {
 //
