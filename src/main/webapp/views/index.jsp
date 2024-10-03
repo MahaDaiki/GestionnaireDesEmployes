@@ -17,19 +17,33 @@
 
 <body>
 <nav>
-    <h1 id="hh" class="title"> <i class="fa-solid fa-users"></i>  Employee Management</h1>
+    <h1 class="title"> <i class="fa-solid fa-users"></i>  Employee Management</h1>
 </nav>
 
 <div >
     <img src="assets/img/background.jpg" alt="Description of image" class="image">
 </div>
 
-<a href="employees?action=add" class="button"><i class="fa-solid fa-user-plus"></i></a>
-<form action="employees?action=search" method="get">
-    <input type="text" name="search" placeholder="Search employees..." />
-    <input type="submit" value="Search" />
-</form>
+<div class="search-filter-add-container">
+    <form action="employees?action=search" method="get" class="search-form">
+        <input type="text" name="search" placeholder="Search employees..." />
+        <button type="submit" class="button">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
 
+
+    <form action="employees?action=filter" method="get" class="filter-form">
+        <input type="text" name="filter" placeholder="Filter by department/position" />
+        <button type="submit" class="button">
+            <i class="fa fa-filter"></i>
+        </button>
+    </form>
+
+    <a href="employees?action=add" class="button">
+        <i class="fa-solid fa-user-plus"></i>
+    </a>
+</div>
 
 <div class="card-container">
     <%

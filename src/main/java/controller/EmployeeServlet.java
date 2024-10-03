@@ -79,7 +79,7 @@ public class EmployeeServlet extends HttpServlet {
 
         employeeService.addEmployee(employee);
 
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("views/index.jsp");
 
     }
     private void UpdateEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -115,7 +115,7 @@ public class EmployeeServlet extends HttpServlet {
             Employee employee = employeeService.getEmployee(id);
             if (employee != null) {
                 request.setAttribute("employee", employee);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("editEmployee.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("views/editEmployee.jsp");
                 dispatcher.forward(request, response);
             }
             else {
