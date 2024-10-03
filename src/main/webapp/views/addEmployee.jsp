@@ -30,29 +30,29 @@
         <div class="input-group">
             <i class="fas fa-user"></i>
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
+            <input type="text" class="inputform" name="name" id="name" required>
         </div>
         <div class="input-group">
             <i class="fas fa-envelope"></i>
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" class="inputform"  name="email" id="email" required>
         </div>
         <div class="input-group">
             <i class="fas fa-phone"></i>
             <label for="phone_number">Phone Number:</label>
-            <input type="text" name="phone_number" id="phone_number" required>
+            <input type="text"  class="inputform" name="phone_number" id="phone_number" required>
         </div>
         <div class="input-group">
             <i class="fas fa-building"></i>
             <label for="department">Department:</label>
-            <input type="text" name="department" id="department" required>
+            <input type="text" class="inputform"  name="department" id="department" required>
         </div>
         <div class="input-group">
             <i class="fas fa-briefcase"></i>
             <label for="position">Position:</label>
-            <input type="text" name="position" id="position" required>
+            <input type="text" class="inputform"  name="position" id="position" required>
         </div>
-        <input type="submit" value="Add Employee">
+        <input type="submit" class="submitform" value="Add Employee">
     </form>
 </div>
 
