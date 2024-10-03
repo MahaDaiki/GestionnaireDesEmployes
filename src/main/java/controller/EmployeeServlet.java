@@ -19,7 +19,10 @@ public class EmployeeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
+        if (action == null) {
+            showallEmployees(request, response);
+            return;
+        }
         switch(action){
             case "add":
                 showAddEmployee(request, response);
@@ -30,6 +33,10 @@ public class EmployeeServlet extends HttpServlet {
             case "search":
                 searchEmployees(request, response);
                 break;
+            case "filter":
+                filterEmployees(request, response);
+                break;
+
             default:
                 showallEmployees(request, response);
 
@@ -50,8 +57,6 @@ public class EmployeeServlet extends HttpServlet {
             case "delete":
                 DeleteEmployee(request, response);
                 break;
-//            case "search":
-//                searchEmployees(request, response);
 
             default:
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Action not found");
@@ -144,15 +149,27 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void searchEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String search = request.getParameter("search");
+        String search = request.getParameter("search");
         List<Employee> employees;
 
         if (search == null || search.isEmpty()) {
             employees = employeeService.getAllEmployees();
         } else {
-            employees = employeeService.SerchEmployee(search);
+            employees = employeeService.searchEmployees(search);
         }
-       request.setAttribute("employees", employees);
+
+        request.setAttribute("employees", employees);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/index.jsp");
+        dispatcher.forward(request, response);
+    }
+
+
+        private void filterEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String department = request.getParameter("department");
+        String position = request.getParameter("position");
+        List<Employee> employees = employeeService.filterEmployees(department, position);
+
+        request.setAttribute("employees", employees);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/index.jsp");
         dispatcher.forward(request, response);
     }
