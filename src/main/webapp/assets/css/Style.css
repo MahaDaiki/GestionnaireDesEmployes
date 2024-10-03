@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e2fbff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+nav{
+    font-family: "Baskerville Old Face";
+    font-size: larger;
+    background: #0e3750;
+    padding: 1px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+
+}
+.title{
+    margin-left: 50px;
+    color: white;
+}
+
+.image{
+    width: 100%;
+    height: auto ;
+    display: block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+    filter: blur(2px);
+}
+
+.button {
+    margin: 2rem;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #5aade3;
+    color: white;
+    float: right;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.fa-user-plus{
+    font-size: 1.5rem;
+}
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:20px;
+    padding: 30px;
+}
+
+.card{
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.21);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+
+.card-img{
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 2rem;
+}
+.card-body{
+    padding: 30px;
+}
+
+.card-title{
+    font-size: 25px;
+    margin: 0 0 20px;
+    text-align:center;
+
+}
+.card-button{
+
+}
+.card-text{
+    margin-left: 3rem;
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+}
