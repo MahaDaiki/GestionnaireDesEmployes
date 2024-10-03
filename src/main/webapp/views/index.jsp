@@ -17,7 +17,7 @@
 
 <body>
 <nav>
-    <h1 id="hh" class="title"> <i class="fa-solid fa-users"></i>  Employee Management</h1>
+    <h1 class="title"> <i class="fa-solid fa-users"></i>  Employee Management</h1>
 </nav>
 
 <div >
