@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.Employee" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Set" %>
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,53 +27,72 @@
 </div>
 
 <div class="search-filter-add-container">
-    <form action="employees?action=search" method="get" class="search-form">
+    <form method="get" action="employees" class="search-form">
+        <input type="hidden" name="action" value="search" />
         <input type="text" name="search" placeholder="Search employees..." />
-        <button type="submit" class="button">
+        <button type="submit" value="Search" class="button">
             <i class="fa fa-search"></i>
         </button>
     </form>
 
+    <form method="get" action="employees" class="filter-form">
+        <input type="hidden" name="action" value="filter" />
 
-    <form action="employees?action=filter" method="get" class="filter-form">
-        <input type="text" name="filter" placeholder="Filter by department/position" />
-        <button type="submit" class="button">
-            <i class="fa fa-filter"></i>
-        </button>
+        <!-- Department Filter -->
+        <label for="department">Department:</label>
+        <select name="department" id="department">
+            <option value="">All Departments</option>
+            <c:forEach var="department" items="${uniqueDepartments}">
+                <option value="${department}">${department}</option>
+            </c:forEach>
+        </select>
+
+        <!-- Position Filter -->
+        <label for="position">Position:</label>
+        <select name="position" id="position">
+            <option value="">All Positions</option>
+            <c:forEach var="position" items="${uniquePositions}">
+                <option value="${position}">${position}</option>
+            </c:forEach>
+        </select>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Filter" class="button"/>
     </form>
 
+</div>
     <a href="employees?action=add" class="button">
         <i class="fa-solid fa-user-plus"></i>
     </a>
 </div>
 
-<div class="card-container">
-    <%
-        List<Employee> employees = (List<Employee>) request.getAttribute("employees");
 
-        if (employees != null) {
-            for (Employee employee : employees) {
-    %>
-    <div class="card">
-        <div class="card-img"><i class="fa-solid fa-user-tie"></i></div>
-        <div class="card-body">
-            <h3 class="card-title"><%= employee.getName() %></h3>
-            <p class="card-text">Phone Number: <%= employee.getPhone_number() %></p>
-            <p class="card-text">Email: <%= employee.getEmail() %></p>
-            <p class="card-text">Position: <%= employee.getPosition() %></p>
-            <p class="card-text">Department: <%= employee.getDepartment() %></p>
-            <a href="Employee?action=edit&id=<%= employee.getId() %>" class="card-button"><i class="fas fa-edit"></i> Edit</a>
-        </div>
-    </div>
-    <%
-        }
-    } else {
-    %>
-    <p>No employees found.</p>
-    <%
-        }
-    %>
+
+<div class="card-container">
+    <c:if test="${not empty employees}">
+
+        <c:forEach var="employee" items="${employees}">
+            <div class="card">
+                <div class="card-img"><i class="fa-solid fa-user-tie"></i></div>
+                <div class="card-body">
+                    <h3 class="card-title"><c:out value="${employee.name}"/></h3>
+                    <p class="card-text">Phone Number: <c:out value="${employee.phone_number}"/></p>
+                    <p class="card-text">Email: <c:out value="${employee.email}"/></p>
+                    <p class="card-text">Position: <c:out value="${employee.position}"/></p>
+                    <p class="card-text">Department: <c:out value="${employee.department}"/></p>
+                    <a href="employees?action=edit&id=${employee.id}" class="card-button">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <button><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+        </c:forEach>
+    </c:if>
+    <c:if test="${empty employees}">
+        <p>No employees found.</p>
+    </c:if>
 </div>
+
 
 
 

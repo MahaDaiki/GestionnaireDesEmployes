@@ -34,17 +34,30 @@ public class EmployeeService {
         return EmployeeDao.GetAllEmployees();
     }
 
-    public List<Employee> SerchEmployee(String search){
+    public List<Employee> searchEmployees(String search) {
         List<Employee> employees = getAllEmployees();
 
-        if (search == null || search.isEmpty()){
+        if (search == null || search.isEmpty()) {
             return employees;
         }
-        return employees.stream().filter(
-                employee->employee.getName().toLowerCase().contains(search.toLowerCase())||
-                        employee.getEmail().toLowerCase().contains(search.toLowerCase())||
-                        employee.getDepartment().toLowerCase().contains(search.toLowerCase())||
-                        employee.getPosition().toLowerCase().contains(search.toLowerCase()))
+
+        return employees.stream()
+                .filter(employee ->
+                        employee.getName().toLowerCase().contains(search.toLowerCase()) ||
+                                employee.getEmail().toLowerCase().contains(search.toLowerCase()) ||
+                                employee.getDepartment().toLowerCase().contains(search.toLowerCase()) ||
+                                employee.getPosition().toLowerCase().contains(search.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Employee> filterEmployees(String department, String position) {
+        List<Employee> employees = getAllEmployees();
+
+        return employees.stream()
+                .filter(employee -> (department == null || department.isEmpty() ||
+                        employee.getDepartment().equalsIgnoreCase(department)) &&
+                        (position == null || position.isEmpty() ||
+                                employee.getPosition().equalsIgnoreCase(position)))
                 .collect(Collectors.toList());
     }
 
