@@ -19,7 +19,9 @@
 
 <body>
 <nav>
-    <h1 class="title"> <i class="fa-solid fa-users"></i>  Employee Management</h1>
+    <a href="employees" >
+        <h1 class="title"><i class="fa-solid fa-users"></i> Employee Management</h1>
+    </a>
 </nav>
 
 <div >
@@ -56,16 +58,15 @@
             </c:forEach>
         </select>
 
-        <!-- Submit Button -->
         <input type="submit" value="Filter" class="button"/>
     </form>
 
-</div>
+
     <a href="employees?action=add" class="button">
         <i class="fa-solid fa-user-plus"></i>
     </a>
 </div>
-
+</div>
 
 
 <div class="card-container">
@@ -80,10 +81,18 @@
                     <p class="card-text">Email: <c:out value="${employee.email}"/></p>
                     <p class="card-text">Position: <c:out value="${employee.position}"/></p>
                     <p class="card-text">Department: <c:out value="${employee.department}"/></p>
+                    <div class="button-container">
                     <a href="employees?action=edit&id=${employee.id}" class="card-button">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <button><i class="fa-solid fa-trash"></i></button>
+                    <form action="employees" method="post" onsubmit="return confirm('Are you sure you want to delete this employee?');">
+                        <input type="hidden" name="action" value="delete" />
+                        <input type="hidden" name="id" value="${employee.id}" />
+                        <button type="submit" class="card-button">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                    </div>
                 </div>
             </div>
         </c:forEach>

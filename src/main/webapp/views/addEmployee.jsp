@@ -14,13 +14,15 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Title</title>
 </head>
-<body>
+<body class="formpages">
 <nav>
-    <h1 class="title"> <i class="fa-solid fa-users"></i>  Employee Management</h1>
+    <a href="employees" >
+        <h1 class="title"><i class="fa-solid fa-users"></i> Employee Management</h1>
+    </a>
 </nav>
 
 <div >
-    <img src="assets/img/background.jpg" alt="Description of image" class="image">
+    <img src="assets/img/background.jpg" alt="Description of image" class="background-image">
 </div>
 
 <h2 class="addtitle">Add New Employee</h2>
@@ -35,12 +37,12 @@
         <div class="input-group">
             <i class="fas fa-envelope"></i>
             <label for="email">Email:</label>
-            <input type="email" class="inputform"  name="email" id="email" required>
+            <input type="email" class="inputform"  name="email" id="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address.">
         </div>
         <div class="input-group">
             <i class="fas fa-phone"></i>
             <label for="phone_number">Phone Number:</label>
-            <input type="text"  class="inputform" name="phone_number" id="phone_number" required>
+            <input type="text"  class="inputform" name="phone_number" id="phone_number" required pattern="^\d{10}$" title="Please enter a 10-digit phone number.">
         </div>
         <div class="input-group">
             <i class="fas fa-building"></i>

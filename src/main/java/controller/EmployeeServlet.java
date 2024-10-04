@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 
+import static org.hibernate.internal.util.StringHelper.isEmpty;
+
 public class EmployeeServlet extends HttpServlet {
 
     private EmployeeService employeeService;
@@ -78,6 +80,21 @@ public class EmployeeServlet extends HttpServlet {
         String department = request.getParameter("department");
         String position = request.getParameter("position");
 
+        if (isEmpty(name) || isEmpty(department) || isEmpty(position) || isEmpty(phone_number) || isEmpty(email)) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "input cannot be empty.");
+            return;
+        }
+
+        if (email == null || !email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid email format.");
+            return;
+        }
+
+        if (phone_number == null || !phone_number.matches("^\\d{10}$")) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Phone number must be 10 digits.");
+            return;
+        }
+
         Employee employee = new Employee();
         employee.setName(name);
         employee.setEmail(email);
@@ -87,7 +104,11 @@ public class EmployeeServlet extends HttpServlet {
 
         employeeService.addEmployee(employee);
 
-        response.sendRedirect("views/index.jsp");
+        showallEmployees(request, response);
+
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("views/index.jsp");
+//        dispatcher.forward(request, response);
+
 
     }
     private void UpdateEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -97,11 +118,25 @@ public class EmployeeServlet extends HttpServlet {
         String phone_number = request.getParameter("phone_number");
         String department = request.getParameter("department");
         String position = request.getParameter("position");
+        if (isEmpty(name) || isEmpty(department) || isEmpty(position) || isEmpty(phone_number) || isEmpty(email)) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "input cannot be empty.");
+            return;
+        }
 
+        if (email == null || !email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid email format.");
+            return;
+        }
+
+        if (phone_number == null || !phone_number.matches("^\\d{10}$")) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Phone number must be 10 digits.");
+            return;
+        }
         if (idParm != null) {
             long id = Integer.parseInt(idParm);
 
             Employee employee = new Employee();
+            employee.setId(id);
             employee.setName(name);
             employee.setEmail(email);
             employee.setPhone_number(phone_number);
@@ -109,7 +144,8 @@ public class EmployeeServlet extends HttpServlet {
             employee.setPosition(position);
 
             employeeService.updateEmployee(employee);
-            response.sendRedirect("views/index.jsp");
+//            response.sendRedirect("views/index.jsp");
+            showallEmployees(request, response);
 
         }
         else {
@@ -139,7 +175,8 @@ public class EmployeeServlet extends HttpServlet {
         if (idParm != null) {
             long id = Integer.parseInt(idParm);
             employeeService.deleteEmployee(id);
-            response.sendRedirect("views/index.jsp");
+//            response.sendRedirect("views/index.jsp");
+            showallEmployees(request, response);
         }
     }
 
