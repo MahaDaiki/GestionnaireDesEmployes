@@ -3,10 +3,13 @@ package controller;
 import model.Employee;
 import service.EmployeeService;
 
+import javax.servlet.http.HttpSession;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 
 public class EmployeeServlet extends HttpServlet {
@@ -141,8 +144,19 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void showallEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<Employee> employees = employeeService.getAllEmployees();
-        System.out.println(employees.size());
+//        System.out.println(employees.size());
+        Set<String> uniqueDepartments = employees.stream()
+                .map(Employee::getDepartment)
+                .collect(Collectors.toSet());
+
+        Set<String> uniquePositions = employees.stream()
+                .map(Employee::getPosition)
+                .collect(Collectors.toSet());
+
+        request.setAttribute("uniqueDepartments", uniqueDepartments);
+        request.setAttribute("uniquePositions", uniquePositions);
         request.setAttribute("employees", employees);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/index.jsp");
         dispatcher.forward(request, response);
@@ -157,18 +171,37 @@ public class EmployeeServlet extends HttpServlet {
         } else {
             employees = employeeService.searchEmployees(search);
         }
+        Set<String> uniqueDepartments = employees.stream()
+                .map(Employee::getDepartment)
+                .collect(Collectors.toSet());
 
+        Set<String> uniquePositions = employees.stream()
+                .map(Employee::getPosition)
+                .collect(Collectors.toSet());
+
+        request.setAttribute("uniqueDepartments", uniqueDepartments);
+        request.setAttribute("uniquePositions", uniquePositions);
         request.setAttribute("employees", employees);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/index.jsp");
         dispatcher.forward(request, response);
     }
 
 
-        private void filterEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String department = request.getParameter("department");
-        String position = request.getParameter("position");
-        List<Employee> employees = employeeService.filterEmployees(department, position);
 
+        private void filterEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            String department = request.getParameter("department");
+            String position = request.getParameter("position");
+        List<Employee> employees = employeeService.filterEmployees(department, position);
+            Set<String> uniqueDepartments = employees.stream()
+                    .map(Employee::getDepartment)
+                    .collect(Collectors.toSet());
+
+            Set<String> uniquePositions = employees.stream()
+                    .map(Employee::getPosition)
+                    .collect(Collectors.toSet());
+
+            request.setAttribute("uniqueDepartments", uniqueDepartments);
+            request.setAttribute("uniquePositions", uniquePositions);
         request.setAttribute("employees", employees);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/index.jsp");
         dispatcher.forward(request, response);
